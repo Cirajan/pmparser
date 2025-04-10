@@ -1,16 +1,20 @@
 import re
 import xlsxwriter
+import os
 
 
 
-# Text files containing details for all new papers captured by pubmed for a particular day/days.
+# Text files containing details (in MEDLINE text format) for all new papers captured by pubmed for a particular day/days.
 text_files = ['pubmed-230226[edat].txt', 'pubmed-230227[edat].txt', 'pubmed-230228[edat].txt', 'pubmed-230301[edat].txt', 'pubmed-230302_230303[edat].txt', 'pubmed-230304_230305[edat].txt', 'pubmed-230306_230307[edat].txt', 'pubmed-230308_230309[edat].txt']
 
 
 # Loop for each file in text_files list
 for name in text_files:
     
-    f = open(name, encoding="utf8")
+    textf_path = './original_pubmed_text/'
+    full_path = os.path.join(textf_path, name) 
+
+    f = open(full_path, encoding="utf8")
 
     # Read the text file into object conatining file content as long single string 
     raw_text = f.read()
@@ -48,8 +52,6 @@ for name in text_files:
 
 
 
-
-
     # Remove the trailing characters for each abstract
     for i in range(len(ab_text)):
         str = ab_text[i][0].split()[:-1]
@@ -57,7 +59,6 @@ for name in text_files:
         ab_text[i] = str_join
     
     # Remove the trailing characters for each title
-    print(ti_text[3])
     for i in range(len(ti_text)):
         str = ti_text[i][0].split()[:-1]
         str_join = ' '.join(str)
@@ -68,11 +69,16 @@ for name in text_files:
     # Remove the .txt exntension from file name
     new_name = name.split('.')[0]
 
-    # Create xlsx workbook using file name
-    workbook = xlsxwriter.Workbook(new_name+'.xlsx')
+    # Specify output directory for .xlsx files
+    output_dir = './processed_xlsx'
+    os.makedirs(output_dir, exist_ok=True)  # Make sure the folder exists
+
+    # Create xlsx workbook in output dir using file name
+    workbook = xlsxwriter.Workbook(os.path.join(output_dir, new_name + '.xlsx'))
 
     # Add worksheet to xlsx file
     worksheet = workbook.add_worksheet()
+
 
 
     # Names for columns to be written to the xlxs worksheet
