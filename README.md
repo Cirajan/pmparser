@@ -4,7 +4,7 @@ This Python script automates the creation of training data for a machine learnin
 
 ## 🔍 Project Purpose
 
-OMIA ([omia.org](https://omia.org)) is an online catalogue of inherited disorders in animals. To maintain and grow this catalogue, OMIA regularly adds references to new, relevant scientific papers from PubMed. A machine learning model is being developed to **shortlist likely-relevant papers** from the daily influx of biomedical literature. This script helps prepare **training data** for that model.
+OMIA ([omia.org](https://omia.org)) is an online catalogue of inherited disorders in animals. To maintain and grow this catalogue, OMIA regularly adds references to new, relevant scientific papers from PubMed. A machine learning model has being developed to **shortlist likely-relevant papers** from the daily influx of biomedical literature. This script helped prepare **training data** for that model.
 
 ## 🧠 What This Script Does
 
